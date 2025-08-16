@@ -1,6 +1,6 @@
 import express, {Request, Response} from 'express';
 import cors from 'cors';
-import { testConnection, postNote} from './util/mysqlUtil';
+import { getNote, postNote} from './util/mysqlUtil';
 
 const app = express();
 const PORT = 3000;

@@ -18,3 +18,8 @@ export async function postNote(title: string, content: string){
     const [result] = await pool.query('INSERT INTO notes (title, content) VALUES (?, ?)', [title, content]);
     return result;
 }
+
+export async function getNote(id: number) {
+    const [row] = await pool.query('SELECT * FROM notes WHERE id = ?', [id]);
+    return row;
+}
