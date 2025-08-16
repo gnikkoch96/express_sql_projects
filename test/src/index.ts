@@ -8,6 +8,11 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+// routes
+app.post('/api/v1/notes', (req: Request, res: Response) => {
+    
+});
+
 // start server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
