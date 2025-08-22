@@ -19,7 +19,20 @@ export async function postNote(title: string, content: string){
     return result;
 }
 
-export async function getNote(id: number) {
+export async function getNote(id: string) {
     const [row] = await pool.query('SELECT * FROM notes WHERE id = ?', [id]);
     return row;
+}
+
+export async function getAllNotes(){
+    const [row] = await pool.query('SELECT * FROM notes');
+    return row;
+}
+
+export async function updateNote(id: string, newTitle: string, newContent: string){
+    const [result] = await pool.query('UPDATE notes SET title = ?, content = ? WHERE id = ?', 
+        [newTitle, newContent, id]
+    );
+
+    return result;
 }
