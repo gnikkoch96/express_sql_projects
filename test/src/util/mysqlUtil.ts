@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise';
+import mysql, { ResultSetHeader } from 'mysql2/promise';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -30,9 +30,14 @@ export async function getAllNotes(){
 }
 
 export async function updateNote(id: string, newTitle: string, newContent: string){
-    const [result] = await pool.query('UPDATE notes SET title = ?, content = ? WHERE id = ?', 
+    const [result] = await pool.execute<ResultSetHeader>('UPDATE notes SET title = ?, content = ? WHERE id = ?', 
         [newTitle, newContent, id]
     );
 
+    return result;
+}
+
+export async function deleteNote(id: string){
+    const [result] = await pool.execute<ResultSetHeader>('DELETE FROM notes WHERE id = ?', [id]);
     return result;
 }
